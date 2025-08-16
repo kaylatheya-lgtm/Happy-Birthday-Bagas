@@ -2,68 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I Love You</title>
+  <title>Happy Birthday 🎉</title>
   <style>
     body {
-      background-color: #f0f8ff;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Arial', sans-serif;
+      background: linear-gradient(45deg, #ff9a9e, #a1c4fd, #c2e9fb);
+      background-size: 400% 400%;
+      animation: gradient 12s ease infinite;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
     }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+      z-index: 2;
+    }
+
     h1 {
-      color: #1e90ff;
       font-size: 3em;
-      animation: pulse 2s infinite;
+      animation: bounce 1.5s infinite;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
-    .flower {
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, #1e90ff 40%, transparent 41%);
-      border-radius: 50%;
-      position: relative;
-      animation: spin 6s linear infinite;
+
+    .cake {
+      font-size: 5em;
+      margin: 20px 0;
+      animation: flicker 1s infinite;
     }
-    .flower::before,
-    .flower::after {
-      content: '';
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, #1e90ff 40%, transparent 41%);
-      border-radius: 50%;
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .love {
+      font-size: 1.8em;
+      margin-top: 10px;
+      color: #b3e5fc;
+      font-style: italic;
+      animation: fadeIn 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+
+    /* konfeti */
+    .confetti {
       position: absolute;
-      top: 0;
-      left: 0;
+      width: 10px;
+      height: 10px;
+      background-color: white;
+      top: -10px;
+      animation: fall linear forwards;
     }
-    .flower::before {
-      transform: rotate(60deg);
-    }
-    .flower::after {
-      transform: rotate(120deg);
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    footer {
-      margin-top: 20px;
-      font-size: 1.2em;
-      color: #333;
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>I Love You</h1>
-  <div class="flower"></div>
-  <footer>For Bagas 💙</footer>
+  <div class="container">
+    <h1>Always Yours</h1>
+    <div class="cake">🍰</div>
+    <p class="love">💙 I Love You 💙</p>
+  </div>
+
+  <script>
+    // buat konfeti random
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      document.body.appendChild(confetti);
+
+      const size = Math.random() * 8 + 5;
+      confetti.style.width = size + "px";
+      confetti.style.height = size + "px";
+
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.backgroundColor =
+        ["#2196f3", "#ffffff", "#90caf9", "#42a5f5"][Math.floor(Math.random() * 4)];
+      confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+      setTimeout(() => confetti.remove(), 5000);
+    }
+
+    setInterval(createConfetti, 200);
+  </script>
 </body>
 </html>
